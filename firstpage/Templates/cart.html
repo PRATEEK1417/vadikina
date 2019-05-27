@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CART</title>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+</head>
+<body>
+
+<div class="container">
+    <table border="1">
+        <tr>
+            <th  style="padding:10px">Id</th>
+            <th  style="padding:10px">Name</th>
+        </tr>
+        {% for i,j in products.items %}
+            <td>{{i}}</td>
+            <td>{{j}}</td>
+        <td><button class="btn btn-success del_btn" id="{{i}}" style="background-color:#898ee5" value="ADD TO CART">remove</button></td>
+        <script>
+            $(".del_btn").click(function())
+             {
+             var del= $(this).attr('del');
+             $.ajax({
+             url: '/firstpage/del_from_cart/',
+            data : {
+              "del":del
+            },
+            dataType : 'json',
+            success: function(data) {
+              console.log('successss');
+
+                }
+             })
+             }
+        </script>
+        {% endfor %}
+    </table>
+</div>
+
+
+</body>
+</html>

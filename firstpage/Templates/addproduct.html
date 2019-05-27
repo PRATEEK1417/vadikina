@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title>addproduct</title>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+
+<form method="post" action="{% url 'products' %}"   class="form-horizontal">
+    {% csrf_token %}
+
+<fieldset>
+
+<!-- Form Name -->
+<legend>PRODUCTS</legend>
+
+
+<!-- Product category -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="product_name">PRODUCT CATEGORY</label>
+  <div class="col-md-4">
+  <input id="product_category" name="product_category" placeholder="PRODUCT CATEGORY" class="form-control input-md" required="" type="text">
+
+  </div>
+</div>
+</div>
+
+<!=--product_name-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="product_name">PRODUCT NAME</label>
+  <div class="col-md-4">
+  <input id="product_name" name="product_name" placeholder="PRODUCT NAME" class="form-control input-md" required="" type="text">
+
+  </div>
+</div>
+
+<!-- Available Quantity-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="available_quantity">AVAILABLE QUANTITY</label>
+  <div class="col-md-4">
+  <input id="available_quantity" name="available_quantity" placeholder="AVAILABLE QUANTITY" class="form-control input-md" required="" type="text">
+
+  </div>
+</div>
+
+    <!-- Product image -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="filebutton">PRODUCT IMAGE</label>
+  <div class="col-md-4">
+    <input id="filebutton" name="filebutton" class="input-file" type="file">
+  </div>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="singlebutton">DONE</label>
+  <div class="col-md-4">
+    <button id="singlebutton" name="singlebutton" class="btn btn-primary">YES</button>
+  </div>
+  </div>
+
+</fieldset>
+</form>
+</body>
+</html>
