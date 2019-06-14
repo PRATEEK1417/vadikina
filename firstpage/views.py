@@ -1,7 +1,7 @@
 from functools import wraps
 from django.contrib.sessions.models import Session
 from django.contrib.auth.decorators import *
-from django.http import HttpResponse,HttpResponseRedirect
+from django.http import HttpResponse,HttpResponseRedirect,JsonResponse
 from requests import HTTPError
 from django.shortcuts import render
 import pyrebase
@@ -108,21 +108,22 @@ def log_out(request):
 def cart(request):
     uid = auth.current_user["localId"]
     cart_details=dict(db.child("users").child(uid).child("cart").get().val())
-    del_items
+    print(cart_details)
     return render(request,"cart.html",{"products":cart_details})
 
 def add_cart(request):
     pid = request.GET.get("id")
 
     uid = auth.current_user["localId"]
-    print(uid)
-    db.child("users").child(uid).child("cart").update({"product_id":pid})
+    db.child("users").child(uid).child("cart").update({pid:'0'})
     return HttpResponse(json.dumps({"data":True}))
 
 def del_from_cart(request):
     uid = auth.current_user["localId"]
-    del_item=dict(db.child("users").child(uid).child("cart").remove())
-    return HttpResponse(json.dumps({"data":True}))
+    pid = request.GET.get("del")
+    test = db.child("users").child(uid).child("cart").child(pid).remove()
+    print(test)
+    return JsonResponse(json.dumps({"data":True}),content_type="application/json",safe=False)
 
 
 

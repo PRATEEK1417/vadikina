@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>CART</title>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 </head>
 <body>
@@ -17,13 +17,15 @@
             <th  style="padding:10px">Name</th>
         </tr>
         {% for i,j in products.items %}
+            <tr id="{{i}}">
             <td>{{i}}</td>
             <td>{{j}}</td>
-        <td><button class="btn btn-success del_btn" id="{{i}}" style="background-color:#898ee5" value="ADD TO CART">remove</button></td>
+            <td><button class="btn btn-success del_btn"  style="background-color:#898ee5" value="ADD TO CART">remove</button></td>
+            </tr>
         <script>
-            $(".del_btn").click(function())
+            $(".del_btn").click(function()
              {
-             var del= $(this).attr('del');
+             var del= $(this).parent().parent().attr('id');
              $.ajax({
              url: '/firstpage/del_from_cart/',
             data : {
@@ -31,11 +33,11 @@
             },
             dataType : 'json',
             success: function(data) {
-              console.log('successss');
+              $("#"+del).remove();
 
                 }
-             })
-             }
+             });
+             });
         </script>
         {% endfor %}
     </table>
